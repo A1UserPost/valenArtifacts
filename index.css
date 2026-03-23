@@ -1,0 +1,49 @@
+    * { 
+	margin: 0; 
+	padding: 0; 
+	box-sizing: border-box; 
+	font-family: Arial, sans-serif;
+	}
+    body { 
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 1rem;
+	line-height: 1.5;
+	}
+    .app-section { 
+	margin: 2rem 0;
+	padding: 1.5rem;
+	border: 1px solid #eee;
+	border-radius: 8px;
+	}
+	
+    h2, h3 { margin: 1rem 0; }
+    
+	input, textarea, button { 
+	width: 100%;
+	padding: 0.8rem;
+	margin: 0.5rem 0;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 1rem;
+	}
+	
+    .answer-buttons { 
+	display: flex; gap: 1rem; 
+	}
+	
+	
+    .answer-buttons button { 
+	width: 50%;
+	background: #007bff;
+	color: white;
+	border: none;
+	cursor: pointer;
+	}
+    .answer-buttons button:hover {
+	background: #0056b3;
+	}
+	
+    .char-count { font-size: 0.9rem; color: #666; text-align: right; }
+    .artifact { margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #f0f0f0; font-size: 0.9rem; 
+}
