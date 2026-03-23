@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href='index.css'
+  <title>User Posting App</title>
+</head>
+<body>
+
+  <!-- Functional App Section -->
+  <div class="app-section">
+    <h2>Fun Argument Platform</h2>
+    <!-- Question Input -->
+    <div>
+      <h3>Enter a Question</h3>
+      <input type="text" id="questionInput" placeholder="e.g., Is water wet? Which galaxy wins a fight?">
+      <button onclick="saveQuestion()">Save Question</button>
+    </div>
+
+    <!-- Answer Selection -->
+    <div style="margin-top: 2rem;">
+      <h3>Pick Your Stance</h3>
+      <div class="answer-buttons">
+        <button onclick="selectAnswer('Side A')">Side A</button>
+        <button onclick="selectAnswer('Side B')">Side B</button>
+      </div>
+      <p id="selectedAnswer" style="margin-top: 1rem; font-weight: bold; color: #007bff;">No side selected yet!</p>
+    </div>
+
+    <!-- Reason Input -->
+    <div style="margin-top: 2rem;">
+      <h3>Your Reason</h3>
+      <textarea id="reasonInput" placeholder="Write your reason for your stance..." maxlength="500" oninput="countChars()"></textarea>
+      <p class="char-count" id="charCount">0 / 500 characters</p>
+      <button onclick="saveReason()">Save Reason</button>
+    </div>
+  </div>
+  <script src='app.js'></script>
+</body>
