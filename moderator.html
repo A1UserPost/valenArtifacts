@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moderator - Argument Platform</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body { max-width: 1200px; margin: 0 auto; padding: 1rem; line-height: 1.5; }
+    .NavbarContainer { background: #dc3545; color: #ffffff; padding: 1rem; margin-bottom: 2rem; border-radius: 8px; }
+    .nav { display: flex; align-items: center; flex-wrap: wrap; }
+    .NavItems { list-style: none; display: flex; gap: 1.5rem; margin-left: auto; }
+    .NavItems li { cursor: pointer; padding: 0.5rem; border-radius: 4px; }
+    .NavItems li:hover { background: #e0e0e0; }
+    .app-section { margin: 2rem 0; padding: 1.5rem; border: 1px solid #eee; border-radius: 8px; }
+    h2, h3 { margin: 1rem 0; }
+    input, button { width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+    button { cursor: pointer; background: #28a745; color: white; border: none; }
+    button:hover { background: #218838; }
+    .side-item { display: flex; gap: 1rem; align-items: center; margin: 1rem 0; padding: 1rem; background: #f8f9fa; border-radius: 6px; }
+    .side-item input { flex: 1; margin: 0; }
+    .delete-side { background: #dc3545; width: auto; padding: 0.5rem 1rem; }
+    .delete-side:hover { background: #c82333; }
+    .publish-btn { background: #007bff; margin-top: 1rem; font-weight: bold; font-size: 1.1rem; }
+    .publish-btn:hover { background: #0056b3; }
+    .refresh-user-ui-btn { background: #ffc107; color: #212529; margin-top: 0.5rem; }
+    .refresh-user-ui-btn:hover { background: #ffca2c; }
+    .status { margin-top: 1rem; padding: 1rem; border-radius: 6px; font-weight: bold; }
+    .success { background: #d4edda; color: #155724; }
+    .error { background: #f8d7da; color: #721c24; }
+    .user-ui-link { display: block; text-align: center; margin: 1rem 0; color: #007bff; text-decoration: none; font-weight: bold; }
+    .user-ui-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="NavbarContainer">
+    <nav class="nav">
+      <h2>Moderator Panel</h2>
+      <ul class="NavItems">
+        <li onclick="openUserUI()">User UI</li>
+        <li>Moderator Home</li>
+        <li>Content Mod</li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Moderator Question and Custom Side Setup  -->
+  <div class="app-section">
+    <h3>Create/Edit Argument Question</h3>
+    <input type="text" id="modQuestionInput" placeholder="e.g., Does pineapple belong on pizza?" required>
+    
+    <h3 style="margin-top: 2rem;">Custom Sides (Add/Edit/Delete)</h3>
+    <div id="sidesContainer">
+      <!-- Default 2 sides  -->
+      <div class="side-item">
+        <input type="text" class="side-input" placeholder="Side name (e.g., Yes, Milky Way, Cat)" value="Yes">
+        <button class="delete-side" onclick="deleteSide(this)">Delete</button>
+      </div>
+      <div class="side-item">
+        <input type="text" class="side-input" placeholder="Side name (e.g., No, Andromeda, Dog)" value="No">
+        <button class="delete-side" onclick="deleteSide(this)">Delete</button>
+      </div>
+    </div>
+    <button onclick="addSide()">+ Add Another Side</button>
+    <button class="publish-btn" onclick="publishQuestion()">PUBLISH TO USER UI</button>
+    <!-- Refresh User UI button -->
+    <button class="refresh-user-ui-btn" onclick="openUserUI()">🔄 Refresh User UI (Load Latest Question)</button>
+    <!-- Direct link to User UI -->
+    <a href="userInterface.html" target="_blank" class="user-ui-link">Open User UI in New Tab</a>
+    <div id="publishStatus" class="status"></div>
+  </div>
+
+  <script>
+    // Open User UI with cache busting 
+    function openUserUI() {
+      const cacheBuster = `?v=${Date.now()}`;
+      window.open(`userInterface.html${cacheBuster}`, '_blank');
+    }
+
+    // Add new custom side input 
+    function addSide() {
+      const container = document.getElementById('sidesContainer');
+      const sideCount = container.children.length + 1;
+      const newSide = document.createElement('div');
+      newSide.className = 'side-item';
+      newSide.innerHTML = `
+        <input type="text" class="side-input" placeholder="Side name (e.g., Maybe, Triangulum)">
+        <button class="delete-side" onclick="deleteSide(this)">Delete</button>
+      `;
+      container.appendChild(newSide);
+    }
+
+    // Delete side 
+    function deleteSide(btn) {
+      const container = document.getElementById('sidesContainer');
+      if (container.children.length > 2) btn.parentElement.remove();
+      else alert("Minimum 2 sides required for the platform!");
+    }
+
+    // Publish question and  custom sides 
+    function publishQuestion() {
+      const question = document.getElementById('modQuestionInput').value.trim();
+      const sideInputs = document.querySelectorAll('.side-input');
+      const sides = Array.from(sideInputs)
+        .map(input => input.value.trim())
+        .filter(side => side); 
+
+      // Validation
+      const status = document.getElementById('publishStatus');
+      if (!question) {
+        status.textContent = "Error: Enter a valid question first!";
+        status.className = "status error";
+        return;
+      }
+      if (sides.length < 2) {
+        status.textContent = "Error: Add at least 2 valid sides (no empty names!)";
+        status.className = "status error";
+        return;
+      }
+
+      // Clear ALL old session storage 
+      sessionStorage.clear();
+      // Save new question/sides
+      sessionStorage.setItem('publishedQuestion', question);
+      sessionStorage.setItem('publishedSides', JSON.stringify(sides));
+      // Add timestamp for tracking
+      sessionStorage.setItem('questionLastUpdated', Date.now());
+
+      // Success message 
+      status.textContent = `Success! Published: "${question}" | Sides: ${sides.join(", ")} — Click "Refresh User UI" to see changes!`;
+      status.className = "status success";
+
+    }
+
+    // Load saved question and sides on mod page refresh
+    window.onload = () => {
+      const savedQ = sessionStorage.getItem('publishedQuestion');
+      const savedSides = JSON.parse(sessionStorage.getItem('publishedSides'));
+      if (savedQ) document.getElementById('modQuestionInput').value = savedQ;
+      if (savedSides && savedSides.length >= 2) {
+        const container = document.getElementById('sidesContainer');
+        container.innerHTML = '';
+        savedSides.forEach(side => {
+          const sideItem = document.createElement('div');
+          sideItem.className = 'side-item';
+          sideItem.innerHTML = `
+            <input type="text" class="side-input" value="${side}">
+            <button class="delete-side" onclick="deleteSide(this)">Delete</button>
+          `;
+          container.appendChild(sideItem);
+        });
+      }
+    }
+  </script>
+</body>
+</html>
