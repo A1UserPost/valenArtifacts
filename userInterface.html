@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title> Argument Platform - User Interface</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body { max-width: 1200px; margin: 0 auto; padding: 1rem; line-height: 1.5; }
+    .NavbarContainer { background: #dc3545; color: #ffffff; padding: 1rem; margin-bottom: 2rem; border-radius: 8px; }
+    .nav { display: flex; align-items: center; flex-wrap: wrap; }
+    .NavItems { list-style: none; display: flex; gap: 1.5rem; margin-left: auto; }
+    .NavItems li { cursor: pointer; padding: 0.5rem; border-radius: 4px; }
+    .NavItems li:hover { background: #e0e0e0; }
+    .app-section { margin: 2rem 0; padding: 1.5rem; border: 1px solid #eee; border-radius: 8px; }
+    h2, h3 { margin: 1rem 0; }
+    textarea, button { width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+    /* Dynamic side buttons */
+    .side-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0; }
+    .side-buttons button { flex: 1; min-width: 100px; background: #007bff; color: white; border: none; cursor: pointer; }
+    .side-buttons button:hover { background: #0056b3; }
+    .side-buttons button.selected { background: #28a745; } /* Highlight selected side */
+    .side-buttons button.locked { background: #6c757d; cursor: not-allowed; }
+    .char-count { font-size: 0.9rem; color: #666; text-align: right; }
+    /* Your Response */
+    .your-response { background: #d4edda; padding: 1.5rem; border-radius: 8px; margin: 2rem 0; border: 1px solid #c3e6cb; display: none; }
+    /* Other's Reasons */
+    .others-responses { margin: 2rem 0; display: none; }
+    .other-reason { background: #f8f9fa; padding: 1rem; border-radius: 6px; margin: 1rem 0; border: 1px solid #dee2e6; }
+    .side-badge { font-weight: bold; color: #007bff; margin-bottom: 0.5rem; display: inline-block; padding: 0.2rem 0.8rem; background: #e9f5ff; border-radius: 20px; }
+    .no-question { color: #dc3545; font-weight: bold; margin: 1rem 0; }
+    .submit-reason-btn { background: #28a745; }
+    .submit-reason-btn:hover { background: #218838; }
+    .submit-reason-btn:disabled { background: #ced1d3; cursor: not-allowed; }
+    textarea.locked { background: #e9ecef; cursor: not-allowed; }
+    /* Refresh button */
+    .refresh-btn { background: #ffc107; color: #212529; width: auto; padding: 0.8rem 1.5rem; margin: 1rem 0; display: inline-block; }
+    .refresh-btn:hover { background: #ffca2c; }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="NavbarContainer">
+    <nav class="nav">
+      <h2>Whole Lotta Nothing</h2>
+      <ul class="NavItems">
+        <li>Home</li> 
+        <li>Your Responses</li>
+        <li>Other's Responses</li>
+        <li>Account</li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main User App Section -->
+  <div class="app-section">
+    <!-- Refresh button for latest content -->
+    <button class="refresh-btn" onclick="window.location.reload(true)">🔄 Load Latest Question</button>
+
+    <!-- Mod-Published Question -->
+    <div>
+      <h3>Current Argument Question</h3>
+      <h2 id="publishedQuestion" class="no-question">No question published yet! Check back soon.</h2>
+    </div>
+
+    <!-- Dynamic Side Selection -->
+    <div style="margin-top: 2rem;">
+      <h3>Pick Your Stance</h3>
+      <div id="sideButtonsContainer" class="side-buttons">
+        <!-- Mod-published sides loaded here dynamically -->
+      </div>
+      <p id="selectedSideStatus" style="margin-top: 1rem; font-weight: bold;">No side selected yet!</p>
+    </div>
+
+    <!-- Reason Input -->
+    <div style="margin-top: 2rem;" id="reasonSection">
+      <h3>Your Reason</h3>
+      <textarea id="reasonInput" placeholder="Write your reason for your stance..." maxlength="500" oninput="countChars()"></textarea>
+      <p class="char-count" id="charCount">0 / 500 characters</p>
+      <button class="submit-reason-btn" id="submitReasonBtn" onclick="submitReason()" disabled>Submit Your Reason</button>
+    </div>
+
+    <!-- YOUR RESPONSE -->
+    <div class="your-response" id="yourResponseContainer">
+      <h3>Your Submitted Response (Non Editable)</h3>
+      <span class="side-badge" id="yourSideBadge"></span>
+      <p id="yourReasonText" style="margin-top: 1rem; font-size: 1.05rem;"></p>
+    </div>
+
+    <!-- OTHER'S RESPONSES -->
+    <div class="others-responses" id="othersResponsesContainer">
+      <h3>Other Users' Reasons</h3>
+      <div id="otherReasonsList">
+        <p>No other user responses yet!</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Global State
+    let selectedSide = null;
+    let reasonSubmitted = false;
+    let publishedSides = [];
+
+    // 1. Initialize UI on load
+    window.onload = () => {
+      loadPublishedQuestionAndSides();
+      loadUserState();
+      updateSubmitButton();
+      loadOtherReasons();
+    };
+
+    // 2. Load MOD-PUBLISHED Question and Sides 
+    function loadPublishedQuestionAndSides() {
+      const question = sessionStorage.getItem('publishedQuestion');
+      publishedSides = JSON.parse(sessionStorage.getItem('publishedSides')) || [];
+      const qElement = document.getElementById('publishedQuestion');
+      const sideContainer = document.getElementById('sideButtonsContainer');
+
+      // Reset all UI state 
+      selectedSide = null;
+      reasonSubmitted = false;
+      document.getElementById('selectedSideStatus').textContent = "No side selected yet!";
+      document.getElementById('reasonInput').value = "";
+      document.getElementById('charCount').textContent = "0 / 500 characters";
+      document.getElementById('yourResponseContainer').style.display = "none";
+      document.getElementById('othersResponsesContainer').style.display = "none";
+      document.getElementById('submitReasonBtn').disabled = true;
+      
+      // Clear side button styles
+      sideContainer.innerHTML = ''; 
+
+      // Load question
+      if (question) {
+        qElement.textContent = question;
+        qElement.className = ""; 
+      } else {
+        qElement.textContent = "No question published yet! Check back soon.";
+        qElement.className = "no-question";
+      }
+
+      // Load dynamic side buttons 
+      if (publishedSides.length >= 2) {
+        publishedSides.forEach(side => {
+          const btn = document.createElement('button');
+          btn.id = `side-${side.replace(/\s+/g, '-')}`;
+          btn.textContent = side;
+          btn.onclick = () => selectSide(side);
+          sideContainer.appendChild(btn);
+        });
+      }
+    }
+
+    // 3. Select Side 
+    function selectSide(side) {
+      if (reasonSubmitted) return; 
+
+      selectedSide = side;
+      sessionStorage.setItem('userSelectedSide', side);
+      document.getElementById('selectedSideStatus').textContent = `You selected: ${side} (cannot be switched once your reason is submitted)`;
+
+      document.querySelectorAll('.side-buttons button').forEach(btn => {
+        btn.classList.toggle('selected', btn.textContent === side);
+      });
+
+      updateSubmitButton();
+    }
+
+    // 4. Character Count for Reason Input
+    function countChars() {
+      const len = document.getElementById('reasonInput').value.length;
+      document.getElementById('charCount').textContent = `${len} / 500 characters`;
+      updateSubmitButton();
+    }
+
+    // 5. Submit Button
+    function updateSubmitButton() {
+      const reason = document.getElementById('reasonInput').value.trim();
+      const btn = document.getElementById('submitReasonBtn');
+      btn.disabled = !selectedSide || reason.length === 0 || reasonSubmitted;
+    }
+
+    // 6. Submit Reason 
+    function submitReason() {
+      const reason = document.getElementById('reasonInput').value.trim();
+      if (!selectedSide || !reason || reasonSubmitted) return;
+
+      reasonSubmitted = true;
+      sessionStorage.setItem('userSubmittedReason', reason);
+
+      // LOCK UI ELEMENTS
+      document.querySelectorAll('.side-buttons button').forEach(btn => {
+        btn.classList.add('locked');
+        btn.classList.remove('selected');
+        btn.disabled = true;
+      });
+      document.getElementById('reasonInput').classList.add('locked');
+      document.getElementById('reasonInput').disabled = true;
+      document.getElementById('submitReasonBtn').disabled = true;
+      document.getElementById('selectedSideStatus').textContent = `You selected: ${selectedSide} `;
+
+      // SHOW YOUR RESPONSE
+      const yourResponse = document.getElementById('yourResponseContainer');
+      document.getElementById('yourSideBadge').textContent = `Your Stance: ${selectedSide}`;
+      document.getElementById('yourReasonText').textContent = reason;
+      yourResponse.style.display = "block";
+
+      // SHOW OTHER'S RESPONSES
+      document.getElementById('othersResponsesContainer').style.display = "block";
+      loadOtherReasons();
+    }
+
+    // 7. Load Other Users' Reasons
+    function loadOtherReasons() {
+      const otherReasons = JSON.parse(sessionStorage.getItem('otherUserReasons')) || [];
+      const listContainer = document.getElementById('otherReasonsList');
+
+      if (otherReasons.length === 0) {
+        listContainer.innerHTML = "<p>No other user responses yet!</p>";
+        return;
+      }
+
+      listContainer.innerHTML = otherReasons.map(item => `
+        <div class="other-reason">
+          <span class="side-badge">${item.author}'s Stance: ${item.side}</span>
+          <p>${item.reason}</p>
+        </div>
+      `).join('');
+    }
+
+    // 8. Load User Saved State 
+    function loadUserState() {
+      const savedSide = sessionStorage.getItem('userSelectedSide');
+      const savedReason = sessionStorage.getItem('userSubmittedReason');
+
+      if (savedSide && !reasonSubmitted) {
+        selectedSide = savedSide;
+        selectSide(savedSide);
+      }
+
+      if (savedReason && !reasonSubmitted) {
+        reasonSubmitted = true;
+        document.getElementById('reasonInput').value = savedReason;
+        countChars();
+        // Lock UI
+        document.querySelectorAll('.side-buttons button').forEach(btn => {
+          btn.classList.add('locked');
+          btn.disabled = true;
+        });
+        document.getElementById('reasonInput').classList.add('locked');
+        document.getElementById('reasonInput').disabled = true;
+        document.getElementById('submitReasonBtn').disabled = true;
+        document.getElementById('selectedSideStatus').textContent = `You selected: ${selectedSide}`;
+        // Show sections
+        document.getElementById('yourResponseContainer').style.display = "block";
+        document.getElementById('yourSideBadge').textContent = `Your Stance: ${selectedSide}`;
+        document.getElementById('yourReasonText').textContent = savedReason;
+        document.getElementById('othersResponsesContainer').style.display = "block";
+      }
+    }
+
+    // 9. Demo: Add Sample Other User Reasons
+    setTimeout(() => {
+      if (sessionStorage.getItem('publishedQuestion') && !JSON.parse(sessionStorage.getItem('otherUserReasons'))) {
+        const demoReasons = [
+          { author: "User 42", side: "No", reason: "Pineapple is a fruit and doesn't belong on savory pizza. Its sweetness clashes with cheese and tomato sauce and the texture is too mushy!" },
+          { author: "User 189", side: "Yes", reason: "Pineapple's sweet and tangy flavor balances the salty cheese and rich tomato sauce. Hawaiian pizza is a classic for a reason!" },
+        ];
+        sessionStorage.setItem('otherUserReasons', JSON.stringify(demoReasons));
+        if (reasonSubmitted) loadOtherReasons();
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
