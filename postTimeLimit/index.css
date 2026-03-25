@@ -1,0 +1,108 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+	background-color: #F5F5F5;
+
+}
+
+.NavbarContainer {
+  height: 90px;
+  background-color: #F55A5A;
+  padding: 30px 25px;
+}
+
+.nav{
+  height: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.NavItems {
+  display: flex;
+  gap: 1.5rem;
+}
+
+nav > img {
+  width: 150px;
+  margin-right: 7px;
+
+
+}
+
+nav > span {
+  color: #F5F5F5;
+  font-family: 'Racing Sans One', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+a:link {
+  color: White;
+}
+
+a:visited {
+  color: White;
+}
+
+a:hover {
+  color: White;
+}
+
+.post-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.expired-question {
+  opacity: 0.65;
+  background: #f3f3f3;
+  pointer-events: none;
+}
+
+.expiry-badge {
+  background-color: #dc2626;
+  color: white;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  margin-left: 8px;
+}
+
+.published-date,
+.expire-date {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 4px 0;
+}
+
+.sides-label {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Locked buttons for expired questions */
+#sideButtonsContainer button.locked {
+  background: #cccccc;
+  cursor: not-allowed;
+  border: none;
+}
+
+#sideButtonsContainer button.selected {
+  background-color: #F55A5A;
+  color: white;
+  border-radius: 6px;
+  padding: 6px 12px;
+}
+
+#reasonInput.locked {
+  background: #eeeeee;
+  cursor: not-allowed;
+}

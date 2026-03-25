@@ -1,0 +1,66 @@
+<html>
+<head>
+  <link rel="stylesheet" href="responseCSS.css" />
+  <title>User Posting App</title>
+</head>
+<body>
+
+  <header class="NavbarContainer">
+    <nav class="nav">
+
+      <img src="StupidDebatesLogo.png" alt="Webistie logo" class="logo" />
+      <span class="span">Whole Lotta Nothing</span>
+      <ul class="NavItems">
+              <li><a href='index.html'>Questions</a></li>
+              <li><a href='yourResponses.html'>Your Reason</a></li>
+              <li><a href='othersResponses.html'>Other's Reasons</a></li>
+              <li><a href='account.html'>Account</a></li>
+      </ul>
+    </nav>
+  </header>
+<!-- Main User App Section -->
+  <div class="app-section">
+    <!-- Refresh button for latest content -->
+    <button class="refresh-btn" onclick="window.location.reload(true)"> Load Latest Question</button>
+
+    <!-- Mod-Published Question -->
+    <div>
+      <h3>Current Argument Question</h3>
+      <h2 id="publishedQuestion" class="no-question">No question published yet! Check back soon.</h2>
+    </div>
+
+    <!-- Dynamic Side Selection -->
+    <div style="margin-top: 2rem;">
+      <h3>Pick Your Stance</h3>
+      <div id="sideButtonsContainer" class="side-buttons">
+        <!-- Mod-published sides loaded here dynamically -->
+      </div>
+      <p id="selectedSideStatus" style="margin-top: 1rem; font-weight: bold;">No side selected yet!</p>
+    </div>
+
+    <!-- Reason Input -->
+    <div style="margin-top: 2rem;" id="reasonSection">
+      <h3>Your Reason</h3>
+      <textarea id="reasonInput" placeholder="Write your reason for your stance..." maxlength="500" oninput="countChars()"></textarea>
+      <p class="char-count" id="charCount">0 / 500 characters</p>
+      <button class="submit-reason-btn" id="submitReasonBtn" onclick="submitReason()" disabled>Submit Your Reason</button>
+    </div>
+
+    <!-- YOUR RESPONSE -->
+    <div class="your-response" id="yourResponseContainer">
+      <h3>Your Submitted Response (Non Editable)</h3>
+      <span class="side-badge" id="yourSideBadge"></span>
+      <p id="yourReasonText" style="margin-top: 1rem; font-size: 1.05rem;"></p>
+    </div>
+
+    <!-- OTHER'S RESPONSES -->
+    <div class="others-responses" id="othersResponsesContainer">
+      <h3>Other Users' Reasons</h3>
+      <div id="otherReasonsList">
+        <p>No other user responses yet!</p>
+      </div>
+    </div>
+  </div>
+<script src="response.js"></script>
+</body>
+</html>

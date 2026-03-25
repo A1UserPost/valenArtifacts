@@ -1,0 +1,187 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+        background-color: #F5F5F5;
+
+}
+
+.NavbarContainer {
+  height: 90px;
+  background-color: #F55A5A;
+  padding: 30px 25px;
+}
+
+.nav{
+  height: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.NavItems {
+  display: flex;
+  gap: 1.5rem;
+}
+
+nav > img {
+  width: 150px;
+  margin-right: 7px;
+
+
+}
+
+nav > span {
+  color: #F5F5F5;
+  font-family: 'Racing Sans One', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+a:link {
+  color: White;
+}
+
+a:visited {
+  color: White;
+}
+
+a:hover {
+  color: White;
+}
+
+
+
+.app-section {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+h2,
+h3 {
+  margin: 1rem 0;
+}
+
+textarea,
+button {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* Dynamic side buttons */
+.side-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.side-buttons button {
+  flex: 1;
+  min-width: 100px;
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.side-buttons button:hover {
+  background: #0056b3;
+}
+
+/* Highlight selected side */
+.side-buttons button.selected {
+  background: #28a745;
+}
+
+.side-buttons button.locked {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+.char-count {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: right;
+}
+
+/* Your Response */
+.your-response {
+  background: #d4edda;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+  border: 1px solid #c3e6cb;
+  display: none;
+}
+
+/* Other's Reasons */
+.others-responses {
+  margin: 2rem 0;
+  display: none;
+}
+
+.other-reason {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+  border: 1px solid #dee2e6;
+}
+
+.side-badge {
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  padding: 0.2rem 0.8rem;
+  background: #e9f5ff;
+  border-radius: 20px;
+}
+
+.no-question {
+  color: #dc3545;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.submit-reason-btn {
+  background: #28a745;
+}
+
+.submit-reason-btn:hover {
+  background: #218838;
+}
+
+.submit-reason-btn:disabled {
+  background: #ced1d3;
+  cursor: not-allowed;
+}
+
+textarea.locked {
+  background: #e9ecef;
+  cursor: not-allowed;
+}
+
+/* Refresh button */
+.refresh-btn {
+  background: #ffc107;
+  color: #212529;
+  width: auto;
+  padding: 0.8rem 1.5rem;
+  margin: 1rem 0;
+  display: inline-block;
+}
+
+.refresh-btn:hover {
+  background: #ffca2c;
+}

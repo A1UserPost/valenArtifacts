@@ -1,0 +1,48 @@
+<html>
+<head>
+  <link rel="stylesheet" href="index.css" />
+  <title>User Posting App</title>
+</head>
+<script>
+  function loadOtherReasons() {
+    const otherReasons = JSON.parse(localStorage.getItem('allResponses')) || [];
+    const container = document.getElementById('responsesContainer');
+    if (otherReasons.length === 0) {
+      container.innerHTML = "<p>No responses yet!</p>";
+      return;
+    }
+    container.innerHTML = otherReasons.map(item => `
+      <div class="other-reason">
+        <span class="side-badge">${item.author}'s Stance: ${item.side}</span>
+        <p>${item.reason}</p>
+      </div>
+    `).join('');
+  }
+  window.onload = loadOtherReasons;
+</script>
+<body>
+
+  <header class="NavbarContainer">
+    <nav class="nav">
+      <img src="StupidDebatesLogo.png" alt="Website logo" class="logo" />
+      <span class="span">Whole Lotta Nothing</span>
+      <ul class="NavItems">
+              <li><a href='index.html'>Questions</a></li>
+              <li><a href='yourResponses.html'>Your Reason</a></li>
+              <li><a href='othersResponses.html'>Other's Reasons</a></li>
+              <li><a href='account.html'>Account</a></li>
+      </ul>
+    </nav>
+  </header>
+  <h1>Other User's Responses</h1>
+  <div id = "appSection">
+  <h3 id="currentQuestion" class="no-question">No question posted yet!</h3>
+    <div id = "responsesContainer">
+      <p>No responses yet!</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+    
+</body>
+</html>

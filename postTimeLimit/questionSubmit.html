@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="questionSubmitCSS.css" />
+  <title>Moderator - Argument Platform</title>
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="NavbarContainer">
+    <nav class="nav">
+      <h2>Moderator Panel</h2>
+      <ul class="NavItems">
+        <li onclick="openUserUI()">User UI</li>
+        <li>Moderator Home</li>
+        <li>Content Mod</li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Moderator Question and Custom Side Setup  -->
+  <div class="app-section">
+    <h3>Create/Edit Argument Question</h3>
+    <input type="text" id="modQuestionInput" placeholder="e.g., Does pineapple belong on pizza?" required>
+    <div id="expiryDateDisplay" class="expiry-display"></div>
+
+    <h3 style="margin-top: 2rem;">Custom Sides (Add/Edit/Delete)</h3>
+    <div id="sidesContainer">
+      <!-- Default 2 sides  -->
+      <div class="side-item">
+        <input type="text" class="side-input" placeholder="Side name (e.g., Yes, Milky Way, Cat)" value="Yes">
+        <button class="delete-side" onclick="deleteSide(this)">Delete</button>
+      </div>
+      <div class="side-item">
+        <input type="text" class="side-input" placeholder="Side name (e.g., No, Andromeda, Dog)" value="No">
+        <button class="delete-side" onclick="deleteSide(this)">Delete</button>
+      </div>
+    </div>
+    <button onclick="addSide()">+ Add Another Side</button>
+    <button class="publish-btn" onclick="publishQuestion()">PUBLISH TO USER UI</button>
+    <!-- Refresh User UI button -->
+    <button class="refresh-user-ui-btn" onclick="openUserUI()"> Refresh User UI (Load Latest Question)</button>
+    <!-- Direct link to User UI -->
+    <a href="userInterface.html" target="_blank" class="user-ui-link">Open User UI in New Tab</a>
+    <div id="publishStatus" class="status"></div>
+  </div>
+
+  <script src="questionSubmit.js"></script>
+</body>
+</html>
