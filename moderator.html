@@ -54,11 +54,11 @@
     <div id="sidesContainer">
       <!-- Default 2 sides  -->
       <div class="side-item">
-        <input type="text" class="side-input" placeholder="Side name (e.g., Yes, Milky Way, Cat)" value="Yes">
+        <input type="text" class="side-input" placeholder="Side name (e.g., Yes)" value="Yes">
         <button class="delete-side" onclick="deleteSide(this)">Delete</button>
       </div>
       <div class="side-item">
-        <input type="text" class="side-input" placeholder="Side name (e.g., No, Andromeda, Dog)" value="No">
+        <input type="text" class="side-input" placeholder="Side name (e.g., No)" value="No">
         <button class="delete-side" onclick="deleteSide(this)">Delete</button>
       </div>
     </div>
@@ -85,7 +85,7 @@
       const newSide = document.createElement('div');
       newSide.className = 'side-item';
       newSide.innerHTML = `
-        <input type="text" class="side-input" placeholder="Side name (e.g., Maybe, Triangulum)">
+        <input type="text" class="side-input" placeholder="Side name">
         <button class="delete-side" onclick="deleteSide(this)">Delete</button>
       `;
       container.appendChild(newSide);
