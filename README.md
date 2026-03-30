@@ -1,8 +1,8 @@
-# Argument Platform README
+# valenArtifacts README
 ## Introduction
 This is a fun and interactive web based User Posting Platform for lighthearted debates and arguments built for cs410 Long Project 1. Moderators create rotating, open ended questions with custom sides and users select a stance, write a supporting reason and view others’ responses.
 
-## Valen's Artifacts (My Contribution)
+## My Contribution
 ### Focus Area
 My work focus on building the main user facing UI/UX for the answer selection and reason posting workflow, along with implementing the 7 day question expiration feature across the platform. Below are my primary deliverables and feature implementations, including all created and modified files as well as key UI components:
 
