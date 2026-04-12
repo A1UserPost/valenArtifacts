@@ -1,49 +1,140 @@
-    * { 
-	margin: 0; 
-	padding: 0; 
-	box-sizing: border-box; 
-	font-family: Arial, sans-serif;
-	}
-    body { 
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 1rem;
-	line-height: 1.5;
-	}
-    .app-section { 
-	margin: 2rem 0;
-	padding: 1.5rem;
-	border: 1px solid #eee;
-	border-radius: 8px;
-	}
-	
-    h2, h3 { margin: 1rem 0; }
-    
-	input, textarea, button { 
-	width: 100%;
-	padding: 0.8rem;
-	margin: 0.5rem 0;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	font-size: 1rem;
-	}
-	
-    .answer-buttons { 
-	display: flex; gap: 1rem; 
-	}
-	
-	
-    .answer-buttons button { 
-	width: 50%;
-	background: #007bff;
-	color: white;
-	border: none;
-	cursor: pointer;
-	}
-    .answer-buttons button:hover {
-	background: #0056b3;
-	}
-	
-    .char-count { font-size: 0.9rem; color: #666; text-align: right; }
-    .artifact { margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #f0f0f0; font-size: 0.9rem; 
+* {
+  box-sizing: border;
+}
+
+body {
+  /*custom cursor*/
+  cursor: url('cursor.png'), auto;
+  background-color: #F5F5F5;
+  background-image: url("frutigerAeroBG.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+}
+
+.NavbarContainer {
+  height: 90px;
+  background-color: #6488ea;
+  padding: 30px 25px;
+}
+
+.nav{
+  height: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.NavItems {
+  display: flex;
+  gap: 1.5rem;
+}
+
+nav > img {
+  width: 150px;
+  margin-right: 7px;
+
+
+}
+
+nav > span {
+  color: #F5F5F5;
+  font-family: 'Racing Sans One', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/*Home page elements*/
+
+.introduction {
+  position: relative;
+  width: 40%;
+  margin: 30px auto 10px;
+  overflow: hidden;
+}
+
+.intro-bg {
+  width: 100%;          
+  height: auto;         
+  display: block;       
+}
+
+.homeContent {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  width: 90%;
+  padding: 10px;
+  box-sizing: border-box;
+  color: rgb(48, 50, 52);
+  font-weight: 400;
+}
+
+.homeContent li {
+margin: 10px;
+}
+
+a:link {
+  color: White;
+}
+
+a:visited {
+  color: White;
+}
+
+a:hover {
+  color: White;
+}
+
+/* upvoting system css things */
+:root {
+  --bg: #0f0f0f;
+  --card: #1a1a1a;
+  --accent: #ff4500;
+  -text: #e8e8e8;
+  --muted: #888;
+}
+
+/* question box */
+.post-card {
+  background-image: url('windows-xp.png');
+  background-size: 100% 100%;    
+  background-position: top left; 
+  background-repeat: no-repeat; 
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 12px;
+  color: black;
+  font-weight: 500;
+}
+
+.upvote-btn {
+  background: none;
+  border: 1px solid #333;
+  color: var(--muted);
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.upvote-btn.voted {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(255, 69, 0, 0.1);
+}
+
+.upvote-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
