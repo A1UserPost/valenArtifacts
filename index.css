@@ -1,5 +1,5 @@
 * {
-  box-sizing: border;
+  box-sizing: border-box;
 }
 
 body {
@@ -10,7 +10,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
+  background-attachment: fixed;
 }
 
 .NavbarContainer {
@@ -35,8 +35,6 @@ body {
 nav > img {
   width: 150px;
   margin-right: 7px;
-
-
 }
 
 nav > span {
@@ -101,17 +99,19 @@ a:hover {
   --muted: #888;
 }
 
-/* question box */
+/* QUESTION PAGE BOX - KEEPS YOUR CURRENT STYLE (small, left) */
 .post-card {
   background-image: url('windows-xp.png');
-  background-size: 100% 100%;    
-  background-position: top left; 
-  background-repeat: no-repeat; 
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 12px;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 5px;
+  padding: 80px 80px 55px 50px;
+  margin: 0 auto 15px 240px;
   color: black;
   font-weight: 500;
+  min-height: 200px;
+  max-width: 50%;
 }
 
 .upvote-btn {
@@ -137,4 +137,14 @@ a:hover {
 .upvote-btn:hover {
   border-color: var(--accent);
   color: var(--accent);
+}
+
+.other-responses .post-card {
+  background-image: url('WindowBox.png');
+  background-size: 100% 95%;
+  background-position: center;
+  margin: 0 55px 20px 45px !important;
+  max-width: calc(100% - 50px) !important;
+  padding: 80px 80px 55px 50px !important;
+  min-height: 200px !important;
 }
