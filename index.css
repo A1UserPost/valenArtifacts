@@ -13,10 +13,111 @@ body {
   background-attachment: fixed;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  top: 340px;
+  left: 10px;
+  width: 350px;
+  height: 350px;
+  background-image: url('fish.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 6;
+  pointer-events: none;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 570px;
+  right: 30px;
+  width: 120px;
+  height: 120px;
+  background-image: url('bubble.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 6;
+  transform: rotate(12deg); 
+  pointer-events: none;
+}
+
+.deco1 {
+  position: fixed;
+  top: 140px;
+  right: 330px;
+  width: 200px;
+  height: 200px;
+  background-image: url('fish2.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 6;
+  transform: rotate(8deg); 
+  pointer-events: none;
+}
+
+.deco2 {
+  position: fixed;
+  top: 280px;
+  right: 30px;
+  width: 210px;
+  height: 210px;
+  background-image: url('fish3.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 6;
+  transform: rotate(-10deg); 
+  pointer-events: none;
+}
+
+.deco3 {
+  position: fixed;
+  top: 600px;
+  right: 90px;
+  width: 400px;
+  height: 400px;
+  background-image: url('fishes.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 6;
+  transform: rotate(5deg); 
+  pointer-events: none;
+}
+
+.deco4 {
+  position: fixed;
+  top: 410px;
+  right: 210px;
+  width: 200px;
+  height: 200px;
+  background-image: url('leaf.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 6;
+  transform: rotate(18deg); 
+  pointer-events: none;
+}
+
+.deco5 {
+  position: fixed;
+  top: 470px;
+  right: 100px;
+  width: 70px;
+  height: 70px;
+  background-image: url('star.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 6;
+  transform: rotate(-15deg); 
+  pointer-events: none;
+}
+
 .NavbarContainer {
   height: 90px;
   background-color: #6488ea;
   padding: 30px 25px;
+  position: relative;
+  z-index: 10; 
 }
 
 .nav{
@@ -99,7 +200,6 @@ a:hover {
   --muted: #888;
 }
 
-/* QUESTION PAGE BOX - KEEPS YOUR CURRENT STYLE (small, left) */
 .post-card {
   background-image: url('windows-xp.png');
   background-size: 100% 100%;
@@ -112,6 +212,8 @@ a:hover {
   font-weight: 500;
   min-height: 200px;
   max-width: 50%;
+  position: relative;
+  z-index: 5;
 }
 
 .upvote-btn {
@@ -140,10 +242,7 @@ a:hover {
 }
 
 .other-responses .post-card {
-  background-image: url('WindowBox.png');
-  background-size: 100% 95%;
-  background-position: center;
-  margin: 0 55px 20px 45px !important;
+  margin: 0 25px 15px 25px !important;
   max-width: calc(100% - 50px) !important;
   padding: 80px 80px 55px 50px !important;
   min-height: 200px !important;
