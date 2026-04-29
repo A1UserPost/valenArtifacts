@@ -13,13 +13,13 @@ body {
   background-attachment: fixed;
 }
 
-body::before {
+body.question-page::before {
   content: "";
   position: fixed;
-  top: 340px;
-  left: 10px;
-  width: 350px;
-  height: 350px;
+  top: 280px;
+  left: 8px;
+  width: 490px;
+  height: 490px;
   background-image: url('fish.webp');
   background-size: contain;
   background-repeat: no-repeat;
@@ -27,42 +27,41 @@ body::before {
   pointer-events: none;
 }
 
-body::after {
-  content: "";
+body.question-page .deco1 {
   position: fixed;
-  top: 570px;
-  right: 30px;
-  width: 120px;
-  height: 120px;
-  background-image: url('bubble.webp');
-  background-size: contain;
-  background-repeat: no-repeat;
-  z-index: 6;
-  transform: rotate(12deg); 
-  pointer-events: none;
-}
-
-.deco1 {
-  position: fixed;
-  top: 140px;
-  right: 330px;
-  width: 200px;
-  height: 200px;
+  top: 205px;
+  right: 425px;
+  width: 230px;
+  height: 230px;
   background-image: url('fish2.webp');
   background-size: contain;
   background-repeat: no-repeat;
   z-index: 6;
-  transform: rotate(8deg); 
+  transform: rotate(-6deg); 
   pointer-events: none;
 }
 
-.deco2 {
+body.question-page .deco2 {
   position: fixed;
-  top: 280px;
-  right: 30px;
-  width: 210px;
-  height: 210px;
+  top: 350px;
+  right: 100px;
+  width: 200px;
+  height: 200px;
   background-image: url('fish3.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 6;
+  transform: rotate(-15deg); 
+  pointer-events: none;
+}
+
+body.question-page .deco3 {
+  position: fixed;
+  top: 550px;
+  right: 75px;
+  width: 510px;
+  height: 510px;
+  background-image: url('fishes.webp');
   background-size: contain;
   background-repeat: no-repeat;
   z-index: 6;
@@ -70,45 +69,31 @@ body::after {
   pointer-events: none;
 }
 
-.deco3 {
+body.question-page .deco4 {
   position: fixed;
-  top: 600px;
-  right: 90px;
-  width: 400px;
-  height: 400px;
-  background-image: url('fishes.webp');
-  background-size: contain;
-  background-repeat: no-repeat;
-  z-index: 6;
-  transform: rotate(5deg); 
-  pointer-events: none;
-}
-
-.deco4 {
-  position: fixed;
-  top: 410px;
-  right: 210px;
-  width: 200px;
-  height: 200px;
+  bottom: 90px;
+  left: 190px;
+  width: 250px;
+  height: 250px;
   background-image: url('leaf.webp');
   background-size: contain;
   background-repeat: no-repeat;
   z-index: 6;
-  transform: rotate(18deg); 
+  transform: rotate(-8deg); 
   pointer-events: none;
 }
 
-.deco5 {
+body.question-page .deco5 {
   position: fixed;
-  top: 470px;
-  right: 100px;
-  width: 70px;
-  height: 70px;
+  top: 17px;
+  right: 35px;
+  width: 75px;
+  height: 75px;
   background-image: url('star.webp');
   background-size: contain;
   background-repeat: no-repeat;
-  z-index: 6;
-  transform: rotate(-15deg); 
+  z-index: 9999;
+  transform: rotate(10deg); 
   pointer-events: none;
 }
 
@@ -147,7 +132,6 @@ nav > span {
 }
 
 /*Home page elements*/
-
 .introduction {
   position: relative;
   width: 40%;
@@ -164,7 +148,7 @@ nav > span {
 .homeContent {
   position: absolute;
   top: 30%;
-  left: 50%;
+  left: 50px;
   transform: translate(-50%, -50%);
   text-align: center;
   color: white;
@@ -206,8 +190,8 @@ a:hover {
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 5px;
-  padding: 80px 80px 55px 50px;
-  margin: 0 auto 15px 240px;
+  padding: 80px 80px 55px 65px;
+  margin: 0 auto 15px 330px;
   color: black;
   font-weight: 500;
   min-height: 200px;
