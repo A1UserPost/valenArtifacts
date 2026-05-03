@@ -16,72 +16,73 @@ body {
 body.question-page::before {
   content: "";
   position: fixed;
-  top: 280px;
-  left: 8px;
-  width: 490px;
-  height: 490px;
-  background-image: url('fish.webp');
+  top: 295px;
+  left: 12px;
+  width: 520px;
+  height: 520px;
+  background-image: url('dolphin.png');
   background-size: contain;
   background-repeat: no-repeat;
-  z-index: 6;
+  z-index: 7;
   pointer-events: none;
 }
 
 body.question-page .deco1 {
   position: fixed;
-  top: 205px;
-  right: 425px;
-  width: 230px;
-  height: 230px;
-  background-image: url('fish2.webp');
+  top: 290px;
+  right: 430px;
+  width: 220px;
+  height: 220px;
+  background-image: url('fishbubble.webp');
   background-size: contain;
   background-repeat: no-repeat;
   z-index: 6;
-  transform: rotate(-6deg); 
+  transform: rotate(3deg); 
   pointer-events: none;
 }
 
 body.question-page .deco2 {
   position: fixed;
-  top: 350px;
-  right: 100px;
-  width: 200px;
-  height: 200px;
-  background-image: url('fish3.webp');
+  top: 130px;
+  right: 40px;
+  width: 320px;
+  height: 320px;
+  background-image: url('bubbles.png');
   background-size: contain;
   background-repeat: no-repeat;
-  z-index: 6;
-  transform: rotate(-15deg); 
+  z-index: 7;
+  transform: rotate(180deg); 
   pointer-events: none;
 }
 
 body.question-page .deco3 {
   position: fixed;
-  top: 550px;
-  right: 75px;
-  width: 510px;
-  height: 510px;
-  background-image: url('fishes.webp');
+  top: 880px;
+  right: 153px;
+  width: 200px;
+  height: 200px;
+  background-image: url('fishyellow.png');
   background-size: contain;
   background-repeat: no-repeat;
-  z-index: 6;
-  transform: rotate(-10deg); 
+  z-index: 7;
+  transform: rotate(-28deg); 
   pointer-events: none;
 }
+/* lets remove this leaf pls
 
 body.question-page .deco4 {
   position: fixed;
-  bottom: 90px;
+  bottom: 170px;
   left: 190px;
   width: 250px;
   height: 250px;
   background-image: url('leaf.webp');
   background-size: contain;
   background-repeat: no-repeat;
-  z-index: 6;
+  z-index: 7;
   transform: rotate(-8deg); 
   pointer-events: none;
-}
+}*/
 
 body.question-page .deco5 {
   position: fixed;
@@ -97,12 +98,58 @@ body.question-page .deco5 {
   pointer-events: none;
 }
 
+body.question-page .deco6 {
+  position: fixed;
+  bottom: -350px;
+  left: 0px;
+  width: 1900px;
+  height: 500px;
+  background-image: url('grass.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 6;
+  pointer-events: none;
+}
+
+body.question-page .deco7 {
+  position: fixed;
+  bottom: 120px;
+  right: 343px;
+  width: 200px;
+  height: 200px;
+  background-image: url('fishblue.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 6;
+  transform: rotate(-30deg); 
+  pointer-events: none;
+}
+
+body.question-page .deco8 {
+  position: fixed;
+  top: 690px;
+  right: 70px;
+  width: 210px;
+  height: 210px;
+  background-image: url('fishorange.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 6;
+  transform: rotate(10deg); 
+  pointer-events: none;
+}
+
 .NavbarContainer {
   height: 90px;
-  background-color: #6488ea;
+  background-image: linear-gradient(
+    to right, 
+    rgba(100, 136, 234, 0.7),
+    rgba(119, 221, 119, 0.7),
+    rgba(250, 200, 152, 0.7)  
+  );
   padding: 30px 25px;
   position: relative;
-  z-index: 10; 
+  z-index: 10;
 }
 
 .nav{
@@ -119,8 +166,9 @@ body.question-page .deco5 {
 }
 
 nav > img {
-  width: 150px;
+  width: 60px;
   margin-right: 7px;
+  height: auto;
 }
 
 nav > span {
@@ -230,4 +278,8 @@ a:hover {
   max-width: calc(100% - 50px) !important;
   padding: 80px 80px 55px 50px !important;
   min-height: 200px !important;
+}
+
+.app-section h2 {
+  color: hsla(180, 100%, 92%, 0.922);
 }
